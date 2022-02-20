@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Davery90/assignments/issues"
   },
-  "homepage": "https://github.com/Davery90/assignments#readme"
+  "homepage": "https://github.com/Davery90/assignments#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
