@@ -1,34 +1,47 @@
-var readline = require('readline-sync');
-var options = ['look inside the desk', 'put your hand in the hole in the wall', 'use your phone to call for help'];
-let key = 0;
-    
-    function startMenu(){
-        options = readline.question("You find yourself in a small room.\nIn front of you is a door leading outside but it is locked. \nThere is a hole in the wall next to you big enough to fit your arm in. \nAcross the room is a desk with a single drawer. \nWhat should you do first?\n"
-        + "\ndesk(" + options[0] + ")"
-        + "\nhole(" + options[1] + ")"
-        + "\nphone(" + options[2] + ")"
-        + "\ntype your next action to continue");
+const readline = require("readline-sync");
+let alive = true;
+let key = false;
+let pressStart = false;
+let room = 1;
+const start = readline.keyIn("press 1 to start", {limit: '$<1>'});
+if (start == 1)
+{
+    console.log("You find yourslef in a room. There is a small hole in the wall big enough for your arm. \nThe door appears to be locked. across the room is a desk with a drawer. \nWhat would you like to do?");
+    pressStart = true;
+}
 
-        switch (key) {
-            case "desk":
-                while (key === 0)
-                    console.log("\nyou look in the desk and find a key"); 
-                if (key === 1)
-                    console.log("you've found everything there is to find here.");
-                    break;
-            case "hole":                   
-                    console.log("\nyou feel a sharp pain in your hand,\n you retract your hand from the hole in the wall and realize a snake bit you.\n you died.");
-                    break;
-            case "phone":                    
-                    console.log("\nyour phone doesnt have a signal.\n it wont be anyhelp.");
-                    break;
-            case "door":  
-                while (key === 0){                  
-                    console.log("the door is locked");
-                } 
-                while (key === 1){
-                    console.log('you unlock the door and escape!');
-                }
-                    break;
+while (alive == true && pressStart == true && room == 1)
+{
+    const optionID = readline.keyIn("Press 1 to put your hand in the hole. \nPress 2 to search the desk. \nPress 3 to open the door.", {limit: '$<1-3>'});
+    if (optionID == 1)
+    {
+        console.log("\nyou feel a sharp pain in your hand. \ntwo puncture marks between your thumb and index finger. \nyou died.");
+        alive = false;
+    }
+    else if (optionID == 2)
+    {
+        if (key == true)
+        {
+            console.log("\nthere is nothing left in the desk");
+        }
+        else if (key == false)
+        {
+            console.log("you take the key sitting in the desk");
+            key = true;
         }
     }
+    else if (optionID == 3)
+    {
+        if (key == false)
+        {
+            console.log("\nthe door is locked. \n you will need a key.");
+        }
+        else if (key == true)
+        {
+            console.log("you have escaped the room!");
+            room = 2;
+            break;
+        }
+    }
+}
+
