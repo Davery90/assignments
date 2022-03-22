@@ -4,6 +4,7 @@ let key = false;
 let pressStart = false;
 let room = 1;
 const start = readline.keyIn("press 1 to start", {limit: '$<1>'});
+
 if (start == 1)
 {
     console.log("You find yourslef in a room. There is a small hole in the wall big enough for your arm. \nThe door appears to be locked. across the room is a desk with a drawer. \nWhat would you like to do?");
