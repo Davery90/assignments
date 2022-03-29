@@ -16,7 +16,7 @@ box.addEventListener("dblclick", function () {
     box.style.backgroundColor = "green"
 });
 
-box.addEventListener("onscroll", function () {
+box.addEventListener("wheel", function () {
     box.style.backgroundColor = "orange"
 });
 
