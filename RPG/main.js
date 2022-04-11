@@ -30,7 +30,7 @@ let randLoot = loot[Math.floor(Math.random() * loot.length)]
 
 // Enemies
 var bandit = new Character("Bandit", dagger, randLoot, 50)
-var knight = new Character("Knight", shortSword, randLoot, 80)
+var knight = new Character("Knight", shortSword, 80)
 var giant = new Character("giant warrior", longSword, longSword, 120)
 var lizard = new Character("Lizard", mace, randLoot, 65)
 var skeleton = new Character("Skeleton", halberd, randLoot, 40)
@@ -67,39 +67,38 @@ const attack = () => {
         + currentEnemy + ` has ` + enemyHP + ` HP left.` + "\n " + "\nPress ENTER key to continue."))
     while (enemyHP > 0) {
         var combatOption = readline.prompt(
-            console.log(`The enemy has ` + enemyHP + ` HP remaining. \n You have the option to attack your enemy or run away. Press "a" to attack or type "run" to attempt an escape. To check your status, press "s"`)).toLowerCase()
-
-        if (combatOption === "run") { //Escape Flow
+            console.log(`The enemy has ` + enemyHP + ` HP remaining. \n You have the option to attack your enemy or run away. Press "a" to attack or type "run" to attempt an escape. To check your status, press "s"`))
+        if (combatOption === "run") { //Run
             let odds = ["run", "stay"]
             let escapeChance = odds[Math.floor(Math.random() * odds.length)]
             if (escapeChance === "run") {
                 run()
                 break
             } else {
-                console.log("> You cannot find an oportunity to run. While you're looking for an escape route the enemy attacks you for: " + enemyAttack)
+                console.log("> You cannot find an oportunity to run. While you look for an escape route the enemy attacks you for: " + enemyAttack)
                 mainCharacter.hp = mainCharacter.hp - enemyAttack
 
             }
-        } else if (combatOption === "a") { //Attack Flow
+        } else if (combatOption === "a") { //Attack
             enemyHP = enemyHP - characterAttack
             console.log("\n> You deal " + characterAttack + " damage with your weapon." + "\n ")
-            if (enemyHP > 0) { //Enemy Attack Flow
+            if (enemyHP > 0) { //Enemy Attack
                 mainCharacter.hp = mainCharacter.hp - enemyAttack
                 console.log(" " + "\n> The enemy retaliates and inflicts " + enemyAttack + " damage with their weapon." + "\n ")
                 if (mainCharacter.hp <= 0) {
                     death()
                     break
                 }
-            } else {   //Loot and Regenerate
-                if (mainCharacter.hp < 125) { //Regenerate
-                    mainCharacter.hp = mainCharacter.hp + (mainCharacter.hp * 1.1)
+            } else {
+                if (mainCharacter.hp < 160) { //Regenerate
+                    mainCharacter.hp = mainCharacter.hp + (mainCharacter.hp * 1.05)
                 }
                 var newInv = []
                 newInv.push(randEnemy.inventory, mainCharacter.inventory) //Loot
                 mainCharacter.inventory = newInv
-                console.log(" " + "\n> The enemy collapses after the blow. You have inflicted a mortal wound. \n Defeating the enemy regenerates some of your health! \n As you search the body you find: " + randEnemy.inventory + "\n ")
+                console.log(" " + "\n> You have defeated the enemy! You regenerate some of your health! \n As you search the body you find: " + randEnemy.inventory + "\n ")
             }
-        } else if (combatOption === "s") { //Status Check
+        } else if (combatOption === "s") { //View Status
             console.log(
                 `\n"` + mainCharacter.name + `, you have ` + mainCharacter.hp + ` HP remaining."`
             )
@@ -109,7 +108,7 @@ const attack = () => {
 
 // Death
 const death = () => {
-    console.log("")
+    console.log("You've been hit in the head. You feel your memories begin to fade. \nYou don't remember how you got here \nand cannot even seem to recall your own name. ")
 }
 
 // Greeting
@@ -119,12 +118,12 @@ readline.prompt(console.log(``
 
 var input = readline.question(``
     + `\nI must have hit my head. I can't seem to remember my name.`
-    + `\n I think its..."`
-    + `\n Enter your name: `);
+    + `\nI think its..."`
+    + `\nEnter your name: `);
 mainCharacter.name = input
 
 readline.prompt(console.log(``
-    + `That's it...` + mainCharacter.name + `. I have ` + mainCharacter.hp + ` Health Points remaining"`
+    + `That's it... My name is ` + mainCharacter.name + `! I have ` + mainCharacter.hp + ` Health Points remaining"`
     + "\nPress ENTER key to continue."))
 
 
@@ -136,7 +135,7 @@ while (mainCharacter.hp > 0) {
     }
     var action = readline.prompt(console.log(``
         + `\n Type "w" to walk. Type "print" to view your inventory and HP.`
-        + ``)).toLowerCase()
+        + ``))
     if (action === "print") {
         console.log(``
             + `\n"` + mainCharacter.name + ` your weapon is: ` + mainCharacter.weapon.name + `, your current inventory is: ` + mainCharacter.inventory + `. You have ` + mainCharacter.hp + ` HP remaining."`
