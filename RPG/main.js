@@ -15,17 +15,17 @@ function Weapon(name, attack) {
     this.attack = attack
 }
 
-let dagger = new Weapon("Dagger", [24, 25, 26, 26, 30])
-let shortSword = new Weapon("Short sword", [33, 34, 35, 35, 30, 45])
+let dagger = new Weapon("Dagger", [20, 20, 20, 50, 50])
+let shortSword = new Weapon("Short sword", [30, 35, 35, 35, 45])
 let longSword = new Weapon("Long sword", [40, 42, 43, 47])
 let mace = new Weapon("Mace", [45, 45, 51])
-let halberd = new Weapon("Halberd", [50, 50, 50, 58])
+let halberd = new Weapon("Halberd", [50, 50, 50, 55])
 
 //Player character
 var mainCharacter = new Character(input, shortSword, ["Key"], 160);
 
 // Loot
-let loot = ["valuable gem", "apple", "avacado", "flask of water"]
+let loot = ["valuable gem", "apple", "flask of water"]
 let randLoot = loot[Math.floor(Math.random() * loot.length)]
 
 // Enemies
@@ -40,7 +40,7 @@ let randEnemy = enemiesArray[Math.floor(Math.random() * enemiesArray.length)]
 
 // Walk
 const walk = () => {
-    let odds = ["engage", "keepWalking", "keepWalking"]
+    let odds = ["engage", "keepWalking"]
     let randOutcome = odds[Math.floor(Math.random() * odds.length)]
     if (randOutcome === "engage") {
         attack()
@@ -113,18 +113,18 @@ const death = () => {
 }
 
 // Greeting
-readline.prompt(console.log(
-    + "\n As you are inspecting your surroundings, a hologram pops up in your view."
+readline.prompt(console.log(``
+    + "\n   I dont know where I am."
     + "\nPress ENTER key to continue."));
 
-var input = readline.question(
-    + `\n"I must have hit my head. I can't seem to remember my name.`
+var input = readline.question(``
+    + `\nI must have hit my head. I can't seem to remember my name.`
     + `\n I think its..."`
     + `\n Enter your name: `);
 mainCharacter.name = input
 
-readline.prompt(console.log(
-    + + mainCharacter.name + `. That's it... I have ` + mainCharacter.hp + ` Health Points remaining"`
+readline.prompt(console.log(``
+    + `That's it...` + mainCharacter.name + `. I have ` + mainCharacter.hp + ` Health Points remaining"`
     + "\nPress ENTER key to continue."))
 
 
@@ -134,13 +134,13 @@ while (mainCharacter.hp > 0) {
         death()
         break
     }
-    var action = readline.prompt(console.log(`///////////////////////////////////////////////////////////////////////////////////\n/////`
-        + `\n> Type "w" to walk. Type "print" to view your inventory and HP.`
-        + `\n/////\n///////////////////////////////////////////////////////////////////////////////////`)).toLowerCase()
+    var action = readline.prompt(console.log(``
+        + `\n Type "w" to walk. Type "print" to view your inventory and HP.`
+        + ``)).toLowerCase()
     if (action === "print") {
-        console.log(`///////////////////////////////////////////////////////////////////////////////////\n/////`
+        console.log(``
             + `\n"` + mainCharacter.name + ` your weapon is: ` + mainCharacter.weapon.name + `, your current inventory is: ` + mainCharacter.inventory + `. You have ` + mainCharacter.hp + ` HP remaining."`
-            + `\n/////\n///////////////////////////////////////////////////////////////////////////////////`)
+            + ``)
     } else if (action === "w") {
         walk()
     }
