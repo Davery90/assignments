@@ -15,8 +15,8 @@ function Weapon(name, attack) {
     this.attack = attack
 }
 
-let dagger = new Weapon("Dagger", [20, 20, 20, 50, 50])
-let shortSword = new Weapon("Short sword", [30, 35, 35, 35, 45])
+let dagger = new Weapon("Dagger", [20, 20, 50, 50, 60])
+let shortSword = new Weapon("Short sword", [30, 30, 30, 30, 45])
 let longSword = new Weapon("Long sword", [40, 42, 43, 47])
 let mace = new Weapon("Mace", [45, 45, 51])
 let halberd = new Weapon("Halberd", [50, 50, 50, 55])
@@ -25,13 +25,13 @@ let halberd = new Weapon("Halberd", [50, 50, 50, 55])
 var mainCharacter = new Character(input, shortSword, ["Key"], 160);
 
 // Loot
-let loot = ["valuable gem", "apple", "flask of water"]
+let loot = ["apple", "flask of water", "iron ingot", "cloth wraps"]
 let randLoot = loot[Math.floor(Math.random() * loot.length)]
 
 // Enemies
 var bandit = new Character("Bandit", dagger, randLoot, 50)
-var knight = new Character("Knight", shortSword, 80)
-var giant = new Character("giant warrior", longSword, longSword, 120)
+var knight = new Character("Knight", shortSword, randLoot, 80)
+var giant = new Character("giant warrior", longSword, longSword, randLoot, 120)
 var lizard = new Character("Lizard", mace, randLoot, 65)
 var skeleton = new Character("Skeleton", halberd, randLoot, 40)
 
@@ -113,7 +113,8 @@ const death = () => {
 
 // Greeting
 readline.prompt(console.log(``
-    + "\n   I dont know where I am."
+    + "\n The back of my skull is searing in pain"
+    + "\n I dont know where I am."
     + "\nPress ENTER key to continue."));
 
 var input = readline.question(``
@@ -127,7 +128,7 @@ readline.prompt(console.log(``
     + "\nPress ENTER key to continue."))
 
 
-// Exploration
+// Walking
 while (mainCharacter.hp > 0) {
     if (mainCharacter.hp <= 0) {
         death()
