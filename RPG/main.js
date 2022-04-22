@@ -49,7 +49,7 @@ const walk = () => {
     } 
 }
 
-// Run
+// +++ Run 
 const run = () => {
     console.log(`The enemy's attention is diverted from you for just a second` + "\n You use this moment to try and run from them. You successfully get away")
 }
